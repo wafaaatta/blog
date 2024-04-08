@@ -2,10 +2,19 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AproposController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/mentionlegale', function () {
+    return view('mentionlegale');
+});
+
+Route::get('/propos', [AproposController::class, 'index'])->name('propos');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
