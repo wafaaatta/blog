@@ -1,5 +1,16 @@
-@include('layouts/front/head.blade.php')
-                    <main class="mt-6">
+                        @include('layouts.front.head')
+                        <h1>Welcome to our Blog</h1>
+                            <div>
+                                @foreach($posts as $post)
+                                    <div>
+                                        <h2>{{ $post->title }}</h2>
+                                        <p>{{ $post->content }}</p>
+                                        <p>{{ $post->description }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        
+                        <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a
                                 href="https://laravel.com/docs"
@@ -106,4 +117,4 @@
                             </div>
                         </div>
                     </main>
-@include('layouts/front/footer.blade.php')
+@include('layouts.front.footer')
