@@ -8,26 +8,15 @@ use App\Models\Post;
 class PostController extends Controller
 {
     //
-
-
     public function index()
     {
         $title = "welcome";
         $content = "test content";
         $description = "test cdescription";
-
+        $posts = Post::latest()->take(6)->get();// Récupérer les 6 ou 8 derniers posts selon votre choix
+        // Pour les 6 derniers posts
         /*$posts = Post::all(); // Récupérer tous les posts de la base de données
         return view('welcome', ['posts' => $posts]); //  je Passe les posts à la vue welcome.blade.php*/
-
-
-        // Récupérer les 6 ou 8 derniers posts selon votre choix
-        $posts = Post::latest()->take(6)->get(); // Pour les 6 derniers posts
-
-        // Ou
-        // $posts = Post::latest()->take(8)->get(); // Pour les 8 derniers posts
-
-
-    
 
         return view('welcome', [
             'title' => $title,
@@ -36,6 +25,22 @@ class PostController extends Controller
             'content' => $content,
 
         ]);
+    }
+
+    
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
+
+    public function myposts()
+    {
+        // Récupérer les publications de l'utilisateur connecté
+        $user = auth()->user(); 
+        $posts = $user->posts; // j'ai une relation 'posts' dans ma modèle User
+
+        // Passer les publications à la vue 'myposts.blade.php'
+        return view('myposts', ['posts' => $posts]);
     }
 
 

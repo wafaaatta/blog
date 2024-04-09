@@ -22,6 +22,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraph,
             'description' => $this->faker->sentence,
+            'user_id' => 1,
         ];
     }
 }

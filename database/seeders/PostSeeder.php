@@ -23,6 +23,7 @@ class PostSeeder extends Seeder
             'title' => 'Premier Post',
             'content' => 'Contenu du premier post...',
             'description' => 'Description du premier post',
+            'user_id' => 1,
         ]);
 
 
