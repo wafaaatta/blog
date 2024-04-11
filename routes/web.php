@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AproposController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/Apropos', [AproposController::class, 'index'])->name('Apropos');
 Route::get('/Mentionslegale', [AproposController::class, 'index'])->name('Mentionslegale');
@@ -26,8 +27,19 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard/myposts/{id}/edit', [PostController::class, 'edit'])->name('dashboard.myposts.edit');
     Route::put('/dashboard/myposts/{id}/edit', [PostController::class, 'update'])->name('dashboard.myposts.update');
+    
+
 
     Route::delete('/dashboard/myposts/{id}', [PostController::class, 'destroy'])->name('dashboard.myposts.destroy');
+
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
     Route::get('/profile', [ProfilController::class, 'edit'])->name('profile.edit');

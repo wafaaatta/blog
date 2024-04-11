@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -52,10 +53,14 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'description' => 'required',
         ]);
+        $request->request->add(['user_id'=>Auth::id()]);
+
 
         Post::create($request->all());
 
@@ -77,7 +82,7 @@ class PostController extends Controller
         return view('edit', compact('post'));
     }
 
-    public function update(Request $request, Post $post)
+    /*public function update(Request $request, Post $post)
     {
         $request->validate([
             'title' => 'required',
@@ -87,7 +92,22 @@ class PostController extends Controller
         $post->update($request->all());
         return redirect()->route('dashboard.myposts')
             ->with('success', 'Post updated successfully');
-    }
+    }*/
+
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required',
+        'content' => 'required',
+    ]);
+
+    $post = Post::find($id);
+    $post->update($request->all());
+
+    return redirect()->route('dashboard.myposts')
+        ->with('success', 'Post updated successfully');
+}
+
 
     public function destroy($id)
     {

@@ -13,6 +13,7 @@
                 <h1>Créer un nouveau post</h1>
     <form action="{{ route('dashboard.myposts.store') }}" method="post">
         @csrf
+        @method('POST')
         <div class="form-group">
             <label for="title">Titre</label>
             <input type="text" name="title" id="title" class="form-control">
@@ -20,6 +21,10 @@
         <div class="form-group">
             <label for="content">Contenu</label>
             <textarea name="content" id="content" class="form-control" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Contenu</label>
+            <textarea name="description" id="description" class="form-control" rows="5"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
     </form>
