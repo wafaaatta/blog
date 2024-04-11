@@ -8,6 +8,7 @@ use App\Models\Post;
 class PostController extends Controller
 {
     //
+    
     public function index()
     {
         $title = "welcome";
@@ -46,7 +47,7 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        return view('create');
     }
 
     public function store(Request $request)
@@ -58,18 +59,22 @@ class PostController extends Controller
 
         Post::create($request->all());
 
-        return redirect()->route('posts.index')
+        return redirect()->route('dashboard.myposts')
             ->with('success', 'Post created successfully.');
     }
 
-    public function show(Post $post)
+    public function show($id)
     {
-        return view('posts.show', compact('post'));
+        $post = Post::find($id);
+        return view('show', compact('post'));
     }
 
-    public function edit(Post $post)
+    public function edit($id)
     {
-        return view('posts.edit', compact('post'));
+        
+        $post = Post::find($id);
+
+        return view('edit', compact('post'));
     }
 
     public function update(Request $request, Post $post)
@@ -78,21 +83,19 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
         ]);
-
+        $post = Post::find($id);
         $post->update($request->all());
-
-        return redirect()->route('posts.index')
+        return redirect()->route('dashboard.myposts')
             ->with('success', 'Post updated successfully');
     }
 
-    public function destroy(Post $post)
+    public function destroy($id)
     {
+        $post = Post::find($id);
         $post->delete();
 
-        return redirect()->route('posts.index')
+        return redirect()->route('dashboard.myposts')
             ->with('success', 'Post deleted successfully');
     }
-
-
     
 }

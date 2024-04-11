@@ -1,10 +1,17 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
-
-@extends('layouts.app')
-
-@section('content')
-    <h1>Créer un nouveau post</h1>
-    <form action="{{ route('posts.store') }}" method="post">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    
+                <h1>Créer un nouveau post</h1>
+    <form action="{{ route('dashboard.myposts.store') }}" method="post">
         @csrf
         <div class="form-group">
             <label for="title">Titre</label>
@@ -16,4 +23,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
     </form>
-@endsection
+
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

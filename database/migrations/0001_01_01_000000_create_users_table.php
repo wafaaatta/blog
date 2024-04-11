@@ -47,3 +47,9 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
     }
 };
+Schema::create('posts', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('user_id')->constrained();
+    // Ajoutez d'autres colonnes nécessaires pour votre modèle Post
+    $table->timestamps();
+});

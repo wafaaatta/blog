@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\Post;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +25,8 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraph,
             'description' => $this->faker->sentence,
-            'user_id' => 1,
+            //'user_id' => 1,
+            'user_id' => User::inRandomOrder()->first()->id, // Sélectionnez un utilisateur aléatoire existant
         ];
     }
 }
