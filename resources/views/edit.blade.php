@@ -23,7 +23,7 @@
             <textarea name="content" id="content" class="form-control" rows="5">{{ $post->content }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-    </form>;
+    </form>
 
                 </div>
             </div>
