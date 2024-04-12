@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/dashboard/myposts/{id}', [PostController::class, 'destroy'])->name('dashboard.myposts.destroy');
 
+    Route::get('/dashboard/myposts/{categoryId}/posts', [PostController::class, 'getPostsByCategoryId'])->name('dashboard/myposts');
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    
 
 
     Route::get('/profile', [ProfilController::class, 'edit'])->name('profile.edit');

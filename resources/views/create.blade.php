@@ -26,6 +26,14 @@
             <label for="description">Contenu</label>
             <textarea name="description" id="description" class="form-control" rows="5"></textarea>
         </div>
+        <div class="form-group" >
+                        <label for="category">Catégorie</label>
+                        <select name="category_id[]" id="category" class="form-control" multiple >
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
     </form>
 

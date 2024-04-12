@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     //
+    
     
     public function index()
     {
@@ -19,7 +21,7 @@ class PostController extends Controller
         // Pour les 6 derniers posts
         /*$posts = Post::all(); // Récupérer tous les posts de la base de données
         return view('welcome', ['posts' => $posts]); //  je Passe les posts à la vue welcome.blade.php*/
-
+        
         return view('welcome', [
             'title' => $title,
             'posts' => $posts,
@@ -40,15 +42,18 @@ class PostController extends Controller
         // Récupérer les publications de l'utilisateur connecté
         $user = auth()->user(); 
         $posts = $user->posts; // j'ai une relation 'posts' dans ma modèle User
+        
 
         // Passer les publications à la vue 'myposts.blade.php'
         return view('myposts', ['posts' => $posts]);
+        //return view('myposts', compact('posts', 'categories'));
     }
 
 
     public function create()
     {
-        return view('create');
+        $categories = Category::all();
+        return view('create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -58,11 +63,12 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'description' => 'required',
+            
         ]);
         $request->request->add(['user_id'=>Auth::id()]);
 
-
-        Post::create($request->all());
+        $post = Post::create($request->all());
+        $post->categories()->attach($request->category_id);
 
         return redirect()->route('dashboard.myposts')
             ->with('success', 'Post created successfully.');
@@ -70,16 +76,17 @@ class PostController extends Controller
 
     public function show($id)
     {
+        $categories = Category::all();
         $post = Post::find($id);
-        return view('show', compact('post'));
+        return view('show', compact('post', 'categories'));
     }
 
     public function edit($id)
-    {
+    {  $categories = Category::all();
         
         $post = Post::find($id);
 
-        return view('edit', compact('post'));
+        return view('edit',compact('post', 'categories'));
     }
 
     /*public function update(Request $request, Post $post)
@@ -118,4 +125,15 @@ class PostController extends Controller
             ->with('success', 'Post deleted successfully');
     }
     
+    /*public function getPostsByCategoryId($categoryId)
+    {
+        // Récupérer la catégorie
+        $category = Category::findOrFail($categoryId);
+
+        // Récupérer tous les posts associés à cette catégorie
+        $posts = $category->posts;
+
+        // Retourner les posts à une vue ou faire ce que vous souhaitez avec eux
+        return view('myposts', compact('posts', 'category'));
+    }*/
 }

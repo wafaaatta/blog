@@ -22,6 +22,16 @@
             <label for="content">Contenu</label>
             <textarea name="content" id="content" class="form-control" rows="5">{{ $post->content }}</textarea>
         </div>
+        <div class="form-group">
+    <label>Catégories</label>
+    @foreach($categories as $category)
+        <div class="form-check">
+            <input type="checkbox" name="categories[]" id="category{{ $category->id }}" value="{{ $category->id }}" class="form-check-input" {{ $post->categories->contains($category->id) ? 'checked' : '' }}>
+            <label for="category{{ $category->id }}" class="form-check-label">{{ $category->name }}</label>
+        </div>
+    @endforeach
+</div>
+
         <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
     </form>
 
