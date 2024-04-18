@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     
                 <h1>Modifier le post</h1>
-    <form action="{{ route('dashboard.myposts.update', $post->id) }}" method="POST">
+    <form action="{{ route('dashboard.myposts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -21,13 +21,19 @@
         <div class="form-group">
             <label for="content">Contenu</label>
             <textarea name="content" id="content" class="form-control" rows="5">{{ $post->content }}</textarea>
+        
+            <div class="form-group"> 
+                <label for="image_url">Image:</label><br>
+                <input type="file" name="image_url" id="image_url" class="form-control" rows="5">{{ $post->image_url}}<br><br>
+            </div>
+
         </div>
         <div class="form-group">
     <label>Catégories</label>
     @foreach($categories as $category)
         <div class="form-check">
             <input type="checkbox" name="categories[]" id="category{{ $category->id }}" value="{{ $category->id }}" class="form-check-input" {{ $post->categories->contains($category->id) ? 'checked' : '' }}>
-            <label for="category{{ $category->id }}" class="form-check-label">{{ $category->name }}</label>
+            <label for="category{{ $category->id }}" class="form-check-label">{{ $category->name }}{{ $category->image_url }}</label>
         </div>
     @endforeach
 </div>

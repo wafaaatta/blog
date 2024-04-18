@@ -15,13 +15,14 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <p class="card-text">{{ $post->content }}</p>
+                    <img class="card-image">{{ $post->image_url }}
+                    
                     <p class="card-text">Catégorie : </p>
                     @foreach($post->categories as $category)
                                 <span> {{ $category->name }}</span>
+                                <span>{{$post->image_url}}</span>
                             @endforeach    
-                            @if($post->image_url)
-                    <img src="{{ asset('storage/images/'.$post->image_url) }}" alt="Post Image">
-                    @endif
+                            
                     <a href="{{route('dashboard.myposts.edit',$post->id)}}">Edit</a>
                     <a href="{{ route('dashboard.myposts.show', $post->id) }}">{{ $post->title }}</a>
                     <form action="{{ route('dashboard.myposts.destroy', $post->id) }}" method="post">

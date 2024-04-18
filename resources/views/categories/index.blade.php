@@ -15,7 +15,7 @@
                     <ul>
                         @foreach($categories as $category)
                             <li>
-                                <a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
+                                <a href="{{ route('categories.show', $category) }}">{{ $category->name }}{{ $category->image_url }}</a>
                                 <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
                                 <form action="{{ route('categories.destroy', $category->id) }}" method="post">
                                     @csrf

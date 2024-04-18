@@ -11,6 +11,9 @@
                 <div class="p-6 text-gray-900">
                     <h1>{{ $post->title }}</h1>
                 <p>{{ $post->content }}</p>
+                @if ($post->image_url)
+                <img src="{{ asset('images/' . $post->image_url) }}" alt="Post Image">
+                @endif
                 <a href="{{ route('dashboard.myposts.edit', $post->id) }}" class="btn btn-primary">Modifier</a>
                 <form action="{{ route('dashboard.myposts.destroy', $post->id) }}" method="post" style="display: inline-block;">
                     @csrf

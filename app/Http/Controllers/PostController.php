@@ -17,6 +17,7 @@ class PostController extends Controller
         $title = "welcome";
         $content = "test content";
         $description = "test cdescription";
+        $image_url = "image_url";
         $posts = Post::latest()->take(6)->get();// Récupérer les 6 ou 8 derniers posts selon votre choix
         // Pour les 6 derniers posts
         /*$posts = Post::all(); // Récupérer tous les posts de la base de données
@@ -27,6 +28,7 @@ class PostController extends Controller
             'posts' => $posts,
             'description' => $description,
             'content' => $content,
+            'image_url' => $image_url,
 
         ]);
     }
@@ -58,21 +60,30 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'title' => 'required',
             'content' => 'required',
             'description' => 'required',
-            
+            'image_url' => 'required|image|mimes:jpeg,png,gif|max:5120',
+            'category_id' => 'required',
         ]);
-        $request->request->add(['user_id'=>Auth::id()]);
-
-        $post = Post::create($request->all());
-        $post->categories()->attach($request->category_id);
-
+    
+        $postData = $request->only(['title', 'content', 'description', 'category_id']);
+        $postData['user_id'] = Auth::id();
+    
+        if ($request->hasFile('image_url')) {
+            $image = $request->file('image_url');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName); 
+            $postData['image_url'] = $imageName;
+        }
+    
+        $post = Post::create($postData);
+    
         return redirect()->route('dashboard.myposts')
             ->with('success', 'Post created successfully.');
     }
+    
 
     public function show($id)
     {
@@ -89,31 +100,31 @@ class PostController extends Controller
         return view('edit',compact('post', 'categories'));
     }
 
-    /*public function update(Request $request, Post $post)
+
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'image_url'=> 'required|image|mimes:jpeg,png,gif|max:5120', 
         ]);
-        $post = Post::find($id);
-        $post->update($request->all());
+    
+        $post = Post::findOrFail($id); // Utilisation de findOrFail pour obtenir le post ou générer une erreur 404 s'il n'est pas trouvé
+        $postData = $request->only(['title', 'content']);
+    
+        if ($request->hasFile('image_url')) {
+            $image = $request->file('image_url');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName); 
+            $postData['image_url'] = $imageName;
+        }
+    
+        $post->update($postData);
+    
         return redirect()->route('dashboard.myposts')
             ->with('success', 'Post updated successfully');
-    }*/
-
-    public function update(Request $request, $id)
-{
-    $request->validate([
-        'title' => 'required',
-        'content' => 'required',
-    ]);
-
-    $post = Post::find($id);
-    $post->update($request->all());
-
-    return redirect()->route('dashboard.myposts')
-        ->with('success', 'Post updated successfully');
-}
+    }
+    
 
 
     public function destroy($id)

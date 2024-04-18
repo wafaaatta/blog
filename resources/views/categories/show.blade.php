@@ -15,6 +15,8 @@
 
     <p>ID : {{ $category->id }}</p>
     <p>Nom : {{ $category->name }}</p>
+    <p>image : {{ $category->image_url }}</p>
+
 
     <a href="{{ route('categories.edit', $category) }}">Modifier</a>
 

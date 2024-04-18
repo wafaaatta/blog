@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     
                 <h1>Créer un nouveau post</h1>
-    <form action="{{ route('dashboard.myposts.store') }}" method="post">
+    <form action="{{ route('dashboard.myposts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="form-group">
@@ -26,14 +26,17 @@
             <label for="description">Contenu</label>
             <textarea name="description" id="description" class="form-control" rows="5"></textarea>
         </div>
+        <div class="form-group"> 
+            <label for="image_url">Image:</label><br>
+            <input type="file" name="image_url" id="image_url" class="form-control" rows="5"><br><br>
+        </div>
+
         <div class="form-group" >
             
                         <label for="category">Catégorie</label>
                         <select name="category_id[]" id="category" class="form-control" multiple >
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                
-
+                                <option value="{{ $category->id }}">{{ $category->name }}{{ $category->image_url }}</option>
                             @endforeach
                         </select>
                     </div>

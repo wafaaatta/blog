@@ -13,10 +13,13 @@
     
     <h1>Créer une nouvelle catégorie</h1>
 
-    <form method="POST" action="{{ route('categories.store') }}">
+    <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
         @csrf
         <label for="name">Nom de la catégorie:</label><br>
         <input type="text" id="name" name="name"><br><br>
+        <label for="image_url">Image:</label><br>
+        <input type="file" id="image_url" name="image_url"><br><br>
+
         <button type="submit">Créer</button>
     </form>
 

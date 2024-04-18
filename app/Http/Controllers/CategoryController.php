@@ -26,9 +26,19 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories|max:255',
+            'image_url' => 'required|image|mimes:jpeg,png,gif|max:5120',
         ]);
-
-        Category::create($request->all());
+        $categoryData = $request->only('name');
+    
+        if ($request->hasFile('image_url')) {
+            $image = $request->file('image_url');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName); 
+            $categoryData['image_url'] = $imageName;
+        }
+    
+        Category::create($categoryData);
+    
         return redirect()->route('categories.index')->with('success', 'Category created successfully');
     }
 
@@ -48,10 +58,21 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|unique:categories|max:255',
+            'name' => 'required|unique:categories,name,'.$category->id.'|max:255',
+            'image_url' => 'required|image|mimes:jpeg,png,gif|max:5120',
         ]);
 
-        $category->update($request->all());
+        $categoryData = $request->only('name');
+    
+        if ($request->hasFile('image_url')) {
+            $image = $request->file('image_url');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName); 
+            $categoryData['image_url'] = $imageName;
+        }
+    
+        $category->update($categoryData);
+    
         return redirect()->route('categories.index')->with('success', 'Category updated successfully');
     }
 
