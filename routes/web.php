@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\BlogController;
 
 
 
@@ -60,6 +61,12 @@ Route::group(['middleware' => ['auth', 'AdminMiddleware']], function () {
 
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
+
+
+Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/blog/categorie/{id}', [BlogController::class, 'showByCategory']);
+Route::get('/blog/post/{id}', [BlogController::class, 'show']);
+
 
 require __DIR__.'/auth.php';
 
