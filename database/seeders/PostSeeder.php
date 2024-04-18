@@ -42,6 +42,7 @@ class PostSeeder extends Seeder
             'title' => 'Premier Post',
             'content' => 'Contenu du premier post...',
             'description' => 'Description du premier post',
+            'image_url' => 'sample_image.jpg',
         ]);
     }
 }

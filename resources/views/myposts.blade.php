@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                   <a href="{{ route('dashboard.myposts.create') }}" class="btn btn-primary">Créer un nouveau post</a> 
+                    <a href="{{ route('dashboard.myposts.create') }}" class="btn btn-primary">Créer un nouveau post</a> 
                 @foreach($posts as $post)
             <div class="card">
                 <div class="card-body">
@@ -19,6 +19,9 @@
                     @foreach($post->categories as $category)
                                 <span> {{ $category->name }}</span>
                             @endforeach    
+                            @if($post->image_url)
+                    <img src="{{ asset('storage/images/'.$post->image_url) }}" alt="Post Image">
+                    @endif
                     <a href="{{route('dashboard.myposts.edit',$post->id)}}">Edit</a>
                     <a href="{{ route('dashboard.myposts.show', $post->id) }}">{{ $post->title }}</a>
                     <form action="{{ route('dashboard.myposts.destroy', $post->id) }}" method="post">
