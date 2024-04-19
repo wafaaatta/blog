@@ -15,13 +15,16 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <p class="card-text">{{ $post->content }}</p>
-                    <img class="card-image">{{ $post->image_url }}
+                    @if($post->image_url)
+                    <img src="{{ URL::to('/') }}/images/{{ $post->image_url }}" alt="{{ $post->title }}">
+                    @endif
                     
                     <p class="card-text">Catégorie : </p>
                     @foreach($post->categories as $category)
-                                <span> {{ $category->name }}</span>
-                                <span>{{$post->image_url}}</span>
-                            @endforeach    
+                        <span> {{ $category->name }}</span>
+                        @if($category->image_url)
+                        <img src="{{ URL::to('/') }}/images/{{ $category->image_url }}" alt="{{ $category->title }}">                        @endif
+                    @endforeach    
                             
                     <a href="{{route('dashboard.myposts.edit',$post->id)}}">Edit</a>
                     <a href="{{ route('dashboard.myposts.show', $post->id) }}">{{ $post->title }}</a>

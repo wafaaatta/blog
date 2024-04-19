@@ -24,14 +24,15 @@ class BlogController extends Controller
         $category = Category::findOrFail($id);
         $posts = $category->posts;
 
-        return view('blog', compact('category', 'posts'));
+        return view('blog.blog', compact('category', 'posts'));
     }
 
     public function show($id)
     {
         $post = Post::findOrFail($id);
+        $title = $post->title;
 
-        return view('post', compact('post'));
+        return view('blog.single', compact('title','post'));
     }
 }
 

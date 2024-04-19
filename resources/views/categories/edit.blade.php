@@ -28,8 +28,15 @@
         @method('PUT')
         <label for="name">Nom de la catégorie:</label><br>
         <input type="text" id="name" name="name" value="{{ $category->name }}"><br><br>
-        <label for="image_url">Image:</label><br>
-        <input type="file" id="image_url" name="image_url" value="{{$category->image_url}}"><br><br>
+        <label for="image_url">Image actuelle:</label><br>
+        @if($category->image_url)
+            <img src="{{ URL::to('/') }}/images/{{ $category->image_url }}" alt="{{ $category->title }}">
+        @else
+            <span>Aucune image disponible</span><br><br>
+        @endif
+        <label for="new_image">Nouvelle image:</label><br>
+        <input type="file" id="new_image" name="new_image"><br><br>
+        <button type="submit">Modifier</button>
         <button type="submit">Modifier</button>
     </form>
 

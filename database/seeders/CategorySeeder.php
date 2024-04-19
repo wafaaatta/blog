@@ -19,8 +19,8 @@ class CategorySeeder extends Seeder
             Category::truncate();
 
              // Insérer des données
-        Category::create(['name' => 'Catégorie 1', 'image_url' => 'URL_de_l_image_1']);
-        Category::create(['name' => 'Catégorie 2', 'image_url' => 'URL_de_l_image_2']);
-        Category::create(['name' => 'Catégorie 3', 'image_url' => 'URL_de_l_image_3']);
+        Category::create(['name' => 'Catégorie 1', 'image_url' => 'sample_image.jpg']);
+        Category::create(['name' => 'Catégorie 2', 'image_url' => 'sample_image_2.jpg']);
+        Category::create(['name' => 'Catégorie 3', 'image_url' => 'sample_image_3.jpg']);
     }
     }

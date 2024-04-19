@@ -36,7 +36,11 @@
                         <label for="category">Catégorie</label>
                         <select name="category_id[]" id="category" class="form-control" multiple >
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}{{ $category->image_url }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}
+                                    @if($category->image_url)
+                                    <img src="{{ asset($category->image_url) }}" alt="{{ $category->name }}" style="width: 50px; height: 50px;">
+                                    @endif
+                                    </option>
                             @endforeach
                         </select>
                     </div>

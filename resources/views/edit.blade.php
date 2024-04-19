@@ -24,7 +24,7 @@
         
             <div class="form-group"> 
                 <label for="image_url">Image:</label><br>
-                <input type="file" name="image_url" id="image_url" class="form-control" rows="5">{{ $post->image_url}}<br><br>
+                <img src="{{ URL::to('/') }}/images/{{ $post->image_url }}" alt="{{ $post->title }}">
             </div>
 
         </div>
@@ -33,7 +33,11 @@
     @foreach($categories as $category)
         <div class="form-check">
             <input type="checkbox" name="categories[]" id="category{{ $category->id }}" value="{{ $category->id }}" class="form-check-input" {{ $post->categories->contains($category->id) ? 'checked' : '' }}>
-            <label for="category{{ $category->id }}" class="form-check-label">{{ $category->name }}{{ $category->image_url }}</label>
+            <label for="category{{ $category->id }}" class="form-check-label">{{ $category->name }}
+                @if($category->image_url)
+                <img src="{{ URL::to('/') }}/images/{{ $category->image_url }}" alt="{{ $category->title }}">
+                @endif
+            </label>
         </div>
     @endforeach
 </div>

@@ -6,6 +6,7 @@
                     <h2>{{ $post->title }}</h2>
                     <p>{{ $post->content }}</p>
                     <p>{{ $post->description }}</p>
+                    <img src="{{ URL::to('/') }}/images/{{ $post->image_url }}" alt="{{ $post->title }}">
                 </div>
             @endforeach
         </div>
@@ -18,14 +19,18 @@
     
         <ul>
             @foreach($categories as $category)
-                <li><a href="/blog/categorie/{{ $category->id }}">{{ $category->name }}{{$category->image_url}}</a></li>
+                <li><a href="/blog/categorie/{{ $category->id }}">{{ $category->name }}</a></li>        
             @endforeach
         </ul>
-    
-        
+
+
         <ul>
             @foreach($posts as $post)
-                <li><a href="/blog/post/{{ $post->id }}">{{ $post->title }}{{$post->image_url}}</a></li>
+                <li><a href="/blog/post/{{ $post->id }}">
+                    {{ $post->title }}
+                    <img src="{{ URL::to('/') }}/images/{{ $post->image_url }}" alt="{{ $post->title }}">
+
+                </a></li>
             @endforeach
         </ul>
 

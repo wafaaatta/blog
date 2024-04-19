@@ -25,7 +25,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraph,
             'description' => $this->faker->sentence,
-            'image_url' => $this->faker->imageUrl(640, 480),
+            'image_url' => 'sample_image.jpg',
             //'user_id' => 1,
             'user_id' => User::inRandomOrder()->first()->id, // Sélectionnez un utilisateur aléatoire existant
         ];

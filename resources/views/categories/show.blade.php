@@ -15,7 +15,11 @@
 
     <p>ID : {{ $category->id }}</p>
     <p>Nom : {{ $category->name }}</p>
-    <p>image : {{ $category->image_url }}</p>
+    @if ($category->image_url)
+            <img src="{{ URL::to('/') }}/images/{{ $category->image_url }}" alt="{{ $category->title }}">
+    @else
+        <p>Aucune image disponible</p>
+    @endif
 
 
     <a href="{{ route('categories.edit', $category) }}">Modifier</a>
