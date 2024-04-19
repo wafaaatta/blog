@@ -1,0 +1,91 @@
+/* Reset des styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Styles pour le titre */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Styles pour la section de filtrage */
+.filtrage {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.categories ul,
+.posts ul {
+    list-style: none;
+}
+
+.categories ul li,
+.posts ul li {
+    margin-bottom: 10px;
+}
+
+/* Styles pour les catégories */
+.categories {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.categories h2 {
+    margin-bottom: 10px;
+}
+
+.categories ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.categories ul li a:hover {
+    background-color: #ccc;
+}
+
+/* Styles pour les articles */
+.posts {
+    flex: 2;
+}
+
+.posts ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.posts ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.posts ul li img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}

@@ -21,10 +21,12 @@ class BlogController extends Controller
 
     public function showByCategory($id)
     {
+        $categories = Category::all();
         $category = Category::findOrFail($id);
         $posts = $category->posts;
+        $title = $category->title;
 
-        return view('blog.blog', compact('category', 'posts'));
+        return view('blog.blog', compact('title','categories','category', 'posts'));
     }
 
     public function show($id)
